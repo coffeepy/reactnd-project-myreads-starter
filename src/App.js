@@ -1,9 +1,7 @@
-
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import BookShelf from './BookShelf.js'
 import './App.css'
-
 class BooksApp extends React.Component {
   state = {
     bshelves: [
@@ -26,6 +24,21 @@ class BooksApp extends React.Component {
     // remove this, ADD in React Router
     showSearchPage: false
   }
+  getBooks = () => {
+    BooksAPI.getAll().then( (books)=> {
+      this.setState( (state)=> {
+        books.map( (book)=> {
+          state.bshelves.filter( (bshelf)=> {
+            if (bshelf.shelfName === book.shelf && book.publisher !== "Simon and Schuster" &&
+            bshelf.books.push(book)){}
+          })
+        })
+      })
+    })
+  }
+  componentDidMount() {
+    this.getBooks()
+  }
   render() {
     return (
       <div className="app">
@@ -37,9 +50,8 @@ class BooksApp extends React.Component {
             <div className="list-books-content">
               <div>
                 {
-                    // generate BookShelves
                   this.state.bshelves.map( (bshelf) =>
-                    <BookShelf bshelf={bshelf} />
+                    <BookShelf bshelf={bshelf} onChange={this.getBooks}/>
                   )
                 }
               </div>
