@@ -3,12 +3,16 @@ import Book from './Book.js'
 
 class BookGrid extends React.Component {
   render() {
-    const { bshelf, onChange } = this.props
+    const { bshelf, onShelfChange, bshelves_names } = this.props
     return(
       <ol className="books-grid">
         {
           bshelf.books.map((book)=>
-            <Book book={book} onChange={onChange} />
+            <Book
+              bshelves_names={bshelves_names}
+              book={book}
+              onShelfChange={onShelfChange}
+            />
           )
         }
       </ol>

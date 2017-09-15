@@ -3,13 +3,17 @@ import BookGrid from './BookGrid.js'
 
 class BookShelf extends React.Component {
   render() {
-    const { bshelf, onChange } = this.props
+    const { bshelf, onShelfChange, bshelves_names } = this.props
     // render bookshelf
     return  (
         <div className="bookshelf">
           <h2 className="bookshelf-title">{bshelf.shelfNameVerbose}</h2>
           <div className="bookshelf-books">
-            <BookGrid bshelf={bshelf} onChange={onChange}/>
+            <BookGrid
+              bshelves_names={bshelves_names}
+              bshelf={bshelf}
+              onShelfChange={onShelfChange}
+            />
           </div>
         </div>
       )
