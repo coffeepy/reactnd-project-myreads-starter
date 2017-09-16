@@ -12,6 +12,7 @@ class BookGrid extends React.Component {
               bshelves_names={bshelves_names}
               book={book}
               onShelfChange={onShelfChange}
+              key={book.id}
             />
           )
         }

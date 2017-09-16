@@ -64,11 +64,12 @@ class BooksApp extends React.Component {
                 <div className="list-books-content">
                   <div>
                     {
-                      this.state.bshelves.map( (bshelf) =>
+                      this.state.bshelves.map( (bshelf, idx) =>
                         <BookShelf
                           bshelves_names={bshelves_names}
                           bshelf={bshelf}
                           onShelfChange={this.onShelfChange}
+                          key={idx}
                         />
                       )
                     }

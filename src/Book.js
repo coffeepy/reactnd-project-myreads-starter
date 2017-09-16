@@ -23,7 +23,7 @@ class Book extends React.Component {
                     // also select shelf in the options
                     bshelves_names.map( (bshelfn)=> {
                       const selected = book.shelf === bshelfn[0] ? true : false
-                      return <option value={bshelfn[0]} defaultValue={selected}>{bshelfn[1]}</option>
+                      return <option key={bshelfn[0]} value={bshelfn[0]} defaultValue={selected}>{bshelfn[1]}</option>
                     }
                     )
                   }

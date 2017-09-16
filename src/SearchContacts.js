@@ -54,6 +54,7 @@ class SearchContacts extends React.Component {
                     book={book}
                     bshelves_names={this.props.bshelves_names}
                     onShelfChange={onShelfChange}
+                    key={book.id}
                   />
                 })
               }
