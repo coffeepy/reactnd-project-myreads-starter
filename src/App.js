@@ -1,5 +1,6 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
+import { Link, Route } from 'react-router-dom'
 import BookShelf from './BookShelf.js'
 import './App.css'
 import SearchContacts from './SearchContacts.js'
@@ -54,37 +55,37 @@ class BooksApp extends React.Component {
     )
     return (
       <div className="app">
-         {/*  NAV like header */}
-         {
-           (!this.state.showSearchPage) ?
-              <div className="list-books">
-                <div className="list-books-title">
-                  <h1>Readem</h1>
-                </div>
-                <div className="list-books-content">
-                  <div>
-                    {
-                      this.state.bshelves.map( (bshelf, idx) =>
-                        <BookShelf
-                          bshelves_names={bshelves_names}
-                          bshelf={bshelf}
-                          onShelfChange={this.onShelfChange}
-                          key={idx}
-                        />
-                      )
-                    }
-                  </div>
-                </div>
-                <div className="open-search">
-                  <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-                </div>
+        <Route exact path="/" render={()=> (
+          <div className="list-books">
+            <div className="list-books-title">
+              <h1>Readem</h1>
+            </div>
+            <div className="list-books-content">
+              <div>
+                {
+                  this.state.bshelves.map( (bshelf, idx) =>
+                    <BookShelf
+                      bshelves_names={bshelves_names}
+                      bshelf={bshelf}
+                      onShelfChange={this.onShelfChange}
+                      key={idx}
+                    />
+                  )
+                }
               </div>
-          :
-            <SearchContacts
-              goBack={()=> {this.setState({showSearchPage: false}); this.getBooks()} }
-              bshelves_names={bshelves_names}
-            />
-         }
+            </div>
+            <div className="open-search">
+              <Link to="/search" >Add a book</Link>
+            </div>
+          </div>
+        )}/>
+        <Route path="/search" render={()=> (
+          <SearchContacts
+            goBack={()=> {this.setState({showSearchPage: false}); this.getBooks()} }
+            bshelves_names={bshelves_names}
+            bshelves = {this.state.bshelves}
+          />
+        )}/>
       </div>
     )
   }

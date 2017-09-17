@@ -8,22 +8,27 @@ class Book extends React.Component {
       onShelfChange,
      } = this.props
 
+    if (book.title === "Android") {
+
+      console.log(book, book.title, book.shelf);
+    }
     return (
         <li>
           <div className="book">
             <div className="book-top">
               <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: `url("${book.imageLinks.smallThumbnail}")` }}></div>
               <div className="book-shelf-changer">
-                <select onChange={(event)=>{
+                <select
+                  onChange={ (event) => {
                     onShelfChange(book, event.target.value)
-                  }}>
+                  }}
+                  defaultValue={book.shelf}
+                >
                   <option value="none" disabled>Move to...</option>
                   {
                     // dynamically add options based on shelf names
-                    // also select shelf in the options
                     bshelves_names.map( (bshelfn)=> {
-                      const selected = book.shelf === bshelfn[0] ? true : false
-                      return <option key={bshelfn[0]} value={bshelfn[0]} defaultValue={selected}>{bshelfn[1]}</option>
+                      return <option key={bshelfn[0]} value={bshelfn[0]} >{bshelfn[1]}</option>
                     }
                     )
                   }
