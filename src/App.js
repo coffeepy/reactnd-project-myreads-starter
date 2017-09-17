@@ -24,8 +24,6 @@ class BooksApp extends React.Component {
         books: [],
       }
     ],
-    // remove this, ADD in React Router
-    showSearchPage: false
   }
   getBooks = () => {
     BooksAPI.getAll().then( (books)=> {
@@ -47,6 +45,9 @@ class BooksApp extends React.Component {
   componentDidMount() {
     this.getBooks()
   }
+  componentDidUpdate() {
+    this.getBooks()
+  }
   render() {
     // i dont want to pass the books along, just the bookshelve value names
     // and vebose names
@@ -58,7 +59,7 @@ class BooksApp extends React.Component {
         <Route exact path="/" render={()=> (
           <div className="list-books">
             <div className="list-books-title">
-              <h1>Readem</h1>
+              <h1>Kendull</h1>
             </div>
             <div className="list-books-content">
               <div>
@@ -81,7 +82,6 @@ class BooksApp extends React.Component {
         )}/>
         <Route path="/search" render={()=> (
           <SearchContacts
-            goBack={()=> {this.setState({showSearchPage: false}); this.getBooks()} }
             bshelves_names={bshelves_names}
             bshelves = {this.state.bshelves}
           />

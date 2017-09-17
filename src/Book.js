@@ -7,11 +7,6 @@ class Book extends React.Component {
       bshelves_names,
       onShelfChange,
      } = this.props
-
-    if (book.title === "Android") {
-
-      console.log(book, book.title, book.shelf);
-    }
     return (
         <li>
           <div className="book">
