@@ -2,7 +2,6 @@ import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book.js'
 import { Link, Route } from 'react-router-dom'
-import BookShelf from './BookShelf.js'
 import './App.css'
 import SearchContacts from './SearchContacts.js'
 // This is the main Component exported below
