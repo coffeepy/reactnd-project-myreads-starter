@@ -1,11 +1,13 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
+import Book from './Book.js'
 import { Link, Route } from 'react-router-dom'
 import BookShelf from './BookShelf.js'
 import './App.css'
 import SearchContacts from './SearchContacts.js'
-
+// This is the main Component exported below
 class BooksApp extends React.Component {
+  //  state.bshelves is an array of data for each shelf
   state = {
     bshelves: [
       {
@@ -26,22 +28,31 @@ class BooksApp extends React.Component {
     ],
   }
   getBooks = () => {
+    /**
+       get all books(objects) using BooksAPI, insert books into the state.bshelves
+      if it has a shelf and it matches the shelfName
+    */
     BooksAPI.getAll().then( (books)=> {
       this.setState( (state)=> {
         state.bshelves.map( (bshelf)=> {
           bshelf.books = []
           books.filter( (book)=> {
-            if (bshelf.shelfName === book.shelf && bshelf.books.push(book)){}
+            bshelf.shelfName === book.shelf && bshelf.books.push(book)
           })
         })
       })
     })
   }
   onShelfChange = (book, shelf) => {
+    /**
+      This function is passed to the Book component, so when shelf changes on the
+      dropdown, it will update the book on the backend and then
+      get all the books again
+    */
     BooksAPI.update(book, shelf).then( () =>
       this.getBooks()
     )
-  }
+  };
   componentDidMount() {
     this.getBooks()
   }
@@ -65,12 +76,23 @@ class BooksApp extends React.Component {
               <div>
                 {
                   this.state.bshelves.map( (bshelf, idx) =>
-                    <BookShelf
-                      bshelves_names={bshelves_names}
-                      bshelf={bshelf}
-                      onShelfChange={this.onShelfChange}
-                      key={idx}
-                    />
+                    <div className="bookshelf">
+                      <h2 className="bookshelf-title">{bshelf.shelfNameVerbose}</h2>
+                      <div className="bookshelf-books">
+                        <ol className="books-grid">
+                          {
+                            bshelf.books.map((book)=>
+                              <Book
+                                bshelves_names={bshelves_names}
+                                book={book}
+                                onShelfChange={this.onShelfChange}
+                                key={book.id}
+                              />
+                            )
+                          }
+                        </ol>
+                      </div>
+                    </div>
                   )
                 }
               </div>
