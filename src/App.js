@@ -56,11 +56,13 @@ class BooksApp extends React.Component {
     this.getBooks()
   }
   componentDidUpdate() {
+    /**
+      used for the back button in search, wouldnt update the books unless i used
+      this function, up to suggestions here!
+    */
     this.getBooks()
   }
   render() {
-    // i dont want to pass the books along, just the bookshelve value names
-    // and vebose names
     const bshelves_names = this.state.bshelves.map( (bshelf)=>
       bshelf = [bshelf.shelfName, bshelf.shelfNameVerbose]
     )
